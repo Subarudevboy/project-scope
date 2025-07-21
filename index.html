@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Scope Validator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">Project Scope Validator</h1>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="step-indicators" id="stepIndicators">
+                    <div class="step-dot active" data-step="1">1</div>
+                    <div class="step-dot" data-step="2">2</div>
+                    <div class="step-dot" data-step="3">3</div>
+                    <div class="step-dot" data-step="4">4</div>
+                    <div class="step-dot" data-step="5">5</div>
+                    <div class="step-dot" data-step="6">6</div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Step 1: Project Basics -->
+            <div class="step-container active" id="step1">
+                <div class="step-header">
+                    <h2>Project Basics</h2>
+                    <p class="step-description">Let's start with the fundamentals of your project</p>
+                </div>
+                <form class="step-form">
+                    <div class="form-group">
+                        <label for="projectTitle">Project Title *</label>
+                        <input type="text" id="projectTitle" name="projectTitle" required>
+                        <span class="helper-text">Choose a clear, descriptive name for your project</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Project Description *</label>
+                        <textarea id="projectDescription" name="projectDescription" rows="4" required></textarea>
+                        <span class="helper-text">Briefly describe what this project aims to achieve</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Stakeholders -->
+            <div class="step-container" id="step2">
+                <div class="step-header">
+                    <h2>Key Stakeholders</h2>
+                    <p class="step-description">Identify who will be involved in this project</p>
+                </div>
+                <form class="step-form">
+                    <div class="stakeholders-container" id="stakeholdersContainer">
+                        <div class="stakeholder-item">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name *</label>
+                                    <input type="text" name="stakeholderName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role *</label>
+                                    <input type="text" name="stakeholderRole" required>
+                                </div>
+                                <button type="button" class="remove-btn" onclick="removeStakeholder(this)">×</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addStakeholder()">+ Add Stakeholder</button>
+                    <span class="helper-text">Add all key people who will be involved or affected by this project</span>
+                </form>
+            </div>
+
+            <!-- Step 3: Goals and Success Criteria -->
+            <div class="step-container" id="step3">
+                <div class="step-header">
+                    <h2>Goals & Success Criteria</h2>
+                    <p class="step-description">Define what success looks like for this project</p>
+                </div>
+                <form class="step-form">
+                    <div class="goals-container" id="goalsContainer">
+                        <div class="goal-item">
+                            <div class="form-group">
+                                <label>Goal *</label>
+                                <input type="text" name="goal" required>
+                                <button type="button" class="remove-btn" onclick="removeGoal(this)">×</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addGoal()">+ Add Goal</button>
+                    <div class="form-group">
+                        <label for="successCriteria">Success Criteria *</label>
+                        <textarea id="successCriteria" name="successCriteria" rows="3" required></textarea>
+                        <span class="helper-text">How will you measure if the project was successful?</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 4: Timeline -->
+            <div class="step-container" id="step4">
+                <div class="step-header">
+                    <h2>Timeline & Milestones</h2>
+                    <p class="step-description">Set realistic dates and key milestones</p>
+                </div>
+                <form class="step-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Start Date *</label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End Date *</label>
+                            <input type="date" id="endDate" name="endDate" required>
+                        </div>
+                    </div>
+                    <div class="milestones-container" id="milestonesContainer">
+                        <div class="milestone-item">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Milestone *</label>
+                                    <input type="text" name="milestone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date *</label>
+                                    <input type="date" name="milestoneDate" required>
+                                </div>
+                                <button type="button" class="remove-btn" onclick="removeMilestone(this)">×</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addMilestone()">+ Add Milestone</button>
+                    <span class="helper-text">Break your project into key milestones with target dates</span>
+                </form>
+            </div>
+
+            <!-- Step 5: Responsibilities -->
+            <div class="step-container" id="step5">
+                <div class="step-header">
+                    <h2>Responsibilities & Tasks</h2>
+                    <p class="step-description">Assign tasks and define responsibilities</p>
+                </div>
+                <form class="step-form">
+                    <div class="responsibilities-container" id="responsibilitiesContainer">
+                        <div class="responsibility-item">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Task/Responsibility *</label>
+                                    <input type="text" name="task" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Assigned To *</label>
+                                    <input type="text" name="assignee" required>
+                                </div>
+                                <button type="button" class="remove-btn" onclick="removeResponsibility(this)">×</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addResponsibility()">+ Add Task</button>
+                    <span class="helper-text">Clearly define who is responsible for what</span>
+                </form>
+            </div>
+
+            <!-- Step 6: Dependencies & Risks -->
+            <div class="step-container" id="step6">
+                <div class="step-header">
+                    <h2>Dependencies & Risks</h2>
+                    <p class="step-description">Identify potential challenges and dependencies</p>
+                </div>
+                <form class="step-form">
+                    <div class="form-group">
+                        <label for="dependencies">Dependencies</label>
+                        <textarea id="dependencies" name="dependencies" rows="3"></textarea>
+                        <span class="helper-text">What does this project depend on? (other projects, resources, approvals)</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="risks">Potential Risks</label>
+                        <textarea id="risks" name="risks" rows="3"></textarea>
+                        <span class="helper-text">What could go wrong? How might you mitigate these risks?</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Summary Page -->
+            <div class="step-container" id="summary" style="display: none;">
+                <div class="step-header">
+                    <h2>Project Scope Summary</h2>
+                    <p class="step-description">Your project readiness assessment</p>
+                </div>
+                
+                <div class="score-container">
+                    <div class="score-circle">
+                        <div class="score-value" id="scoreValue">0%</div>
+                        <div class="score-label">Readiness Score</div>
+                    </div>
+                    <div class="score-message" id="scoreMessage"></div>
+                </div>
+
+                <div class="summary-content" id="summaryContent">
+                    <!-- Summary will be populated by JavaScript -->
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                    <button type="button" class="btn btn-secondary" onclick="downloadPDF()">📄 Download PDF</button>
+                    <button type="button" class="btn btn-primary" onclick="startOver()">🔄 Start Over</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="navigation">
+            <button type="button" class="btn btn-secondary" id="prevBtn" onclick="previousStep()" disabled>← Previous</button>
+            <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">Next →</button>
+            <button type="button" class="btn btn-primary" id="finishBtn" onclick="finishWizard()" style="display: none;">Finish</button>
+        </footer>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="modalOverlay" style="display: none;">
+        <div class="modal">
+            <h3>Complete Project Scope Validation?</h3>
+            <p>Are you ready to generate your project readiness score?</p>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="confirmFinish()">Yes, Complete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Calculating your project readiness score...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <footer>
+        <p>&copy; <center>Demilade Ilesanmi 2025.</center></p>
+    </footer>
+</body>
+</html>
